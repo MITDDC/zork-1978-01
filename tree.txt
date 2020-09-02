@@ -1,0 +1,68 @@
+.
+├── [Sep  2 10:05]  zork
+│   ├── [Sep  1 12:10]  ar1.random
+│   │   ├── [Jul 31  8:44]  conver.10
+│   │   ├── [Jul 31  8:44]  dungon.11
+│   │   ├── [Jul 31  8:44]  dxpray.xtaa12
+│   │   ├── [Jul 31  8:44]  french.11
+│   │   ├── [Jul 31  8:44]  fzork.7
+│   │   ├── [Jul 31  8:44]  gfweep.96
+│   │   ├── [Jul 31  8:44]  gfweep.97
+│   │   ├── [Jul 31  8:43]  gunner.94
+│   │   ├── [Jul 31  8:44]  holida.11
+│   │   ├── [Jul 31  8:44]  j.1
+│   │   ├── [Jul 31  8:44]  map.8
+│   │   ├── [Jul 31  8:44]  mar._ddt_
+│   │   ├── [Jul 31  8:44]  muddle.12
+│   │   ├── [Jul 31  8:44]  pi.1
+│   │   ├── [Jul 31  8:44]  plotso.grid
+│   │   ├── [Jul 31  8:44]  setsn.1
+│   │   ├── [Jul 31  8:44]  wdcnt.1
+│   │   └── [Jul 31  8:44]  zork.3
+│   ├── [Aug 31 13:24]  lcf
+│   │   ├── [Jan 27  1978]  act1.nbin
+│   │   ├── [Jan 27  1978]  act1z.71
+│   │   ├── [Jan 23  1978]  act2.nbin
+│   │   ├── [Jan 23  1978]  act2z.37
+│   │   ├── [Jan 21  1978]  act3z.18
+│   │   ├── [Jan 26  1978]  debug.zork
+│   │   ├── [Jan 28  1978]  defs.89
+│   │   ├── [Jan 28  1978]  defs.nbin
+│   │   ├── [Jan 28  1978]  dungz.129
+│   │   ├── [Jan 30  1978]  foo.bar
+│   │   ├── [Jan 22  1978]  load.7
+│   │   ├── [Jan 21  1978]  makstr.25
+│   │   ├── [Jan 21  1978]  makstr.nbin
+│   │   ├── [Jan 23  1978]  melee.105
+│   │   ├── [Jan 23  1978]  melee.nbin
+│   │   ├── [Jan 22  1978]  mrfz.65
+│   │   ├── [Jan 22  1978]  mrrz.56
+│   │   ├── [Jan 22  1978]  np.168
+│   │   ├── [Jan 22  1978]  np.nbin
+│   │   ├── [Jan 28  1978]  rooms.165
+│   │   ├── [Jan 28  1978]  rooms.nbin
+│   │   └── [Jan 23  1978]  zork.files
+│   ├── [Aug 31 13:24]  madman
+│   │   ├── [Jan 24  1978]  madadv.help
+│   │   ├── [Jan 23  1978]  madadv.save
+│   │   ├── [Jan 24  1978]  madadv.save_0
+│   │   ├── [Jan 26  1978]  madadv.save_1
+│   │   ├── [Jan 26  1978]  madadv.save_2
+│   │   └── [Jan 28  1978]  madadv.save_3
+│   ├── [Aug 31 13:24]  sys2
+│   │   ├── [Jan 22  1978]  ts.zork
+│   │   └── [Jan 24  1978]  ts.zork_0
+│   ├── [Aug 31 13:24]  taa
+│   │   ├── [Jan 23  1978]  ar1.random
+│   │   ├── [Jan 24  1978]  ar1.random_0
+│   │   ├── [Jan 27  1978]  ar1.random_1
+│   │   └── [Jan 27  1978]  ar1.random_2
+│   ├── [Jul 31  8:40]  act1.71
+│   ├── [Jul 31  8:40]  act2.37
+│   ├── [Jul 31  8:41]  act3.18
+│   ├── [Jul 31  8:41]  dung.129
+│   ├── [Jul 31  8:41]  mrf.65
+│   └── [Jul 31  8:42]  mrr.56
+└── [Sep  2 10:45]  tree.txt
+
+6 directories, 59 files

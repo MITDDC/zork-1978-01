@@ -1,0 +1,224 @@
+.font 1 "30vr";
+.font 2 "30vri";
+.font 3 "25fg";
+.if xcribl then start;
+.  !margins! 1000,1000,1000,1000;
+.  adjust;
+.end;
+.else start;
+.  page!height_60;
+.  page!width_72;
+.  nojust;
+.end;
+.turn on "%\{}#";
+.at "$$" foo "|" 
+.if xcribl then
+%2foo%*{
+.else
+foo{
+.
+.page frame page!height high page!width wide;
+.title area heading lines 1 to 3;
+.area text lines 4 to page!height;
+.place text;
+.count page from 1;
+.next page;
+.every heading (,Code-group Decoder,{page})
+.compact;
+.indent 5;
+.single space;
+.preface 1;
+.tabbreak;
+.begin;
+.crbreak;
+.preface 0;
+.indent 0;
+OPERATION OF CODE-GROUP DECODER
+Timothy Anderson
+{date}
+.end;
+.skip 1;
+	The decoder exists as TS XPRAY in the SEND directory.  When it comes up, it
+first prints the version number, and the setting of the various defaults (see below),
+after which it is at top level in MUDDLE.  There
+are several parameters of interest for demonstration:  verbosity, use of
+MAUDE/use of FRAUD, whether numbers are allowed in the code groups, and the
+value returned.  The current settings of all of these may be obtained by
+typing %3<DEFAULTS>%1.
+.skip 1;
+.once flush left;
+VERBOSITY
+	There are three levels of verbosity:
+.begin;
+.indent 0,4;
+.tabs 5;
+	1)\Unverbose:  absolute silence; obtained by typing %3<UNV>%* or ctrl-U.
+	2)\Verbose:  prints out reasonably detailed script of what it's doing,
+followed by MAUDE/FRAUD decoding, corrected decoding, and some
+operating statistics.  See far below for description of what's in a
+script.  This mode more than doubles the CPU time required to correct a decoding.
+Type %3<VERBOSE>%* or ctrl-V.
+	3)\Reasonable:  prints out length of groups,
+MAUDE/FRAUD decoding, corrected decoding,
+and operating statistics.  This is a subset of Verbose.  Due to an
+implementation restriction, this printing will occur $$after| the
+decoding has been completed; there will be a long silence before any output
+appears.  Further, the MAUDE decoding is not available once the decoder has
+finished; changes are made in the data structure for the benefit of the people
+who use it. Type %3<TV>%* or ctrl-X.
+.end;
+	Verbosity is set to "reasonable" initially; a change made as above lasts until
+some other level is specified.  There is no way to change verbosity in
+the call to the decoder; it can be changed during a decoding through use
+of the control characters above.
+.skip 1;
+.once flush left;
+MAUDE/FRAUD
+	The decoder can use either a MAUDE or a FRAUD, chiefly because neither
+is appropriate for all messages.  There are two ways to control this.
+The gval of %3MAUDE-FLAG,%* if non-false, will cause MAUDE to be used.  It is
+initially T.  The third argument to %3FIV,%* which is the main decoder entry,
+is optional and defaults to %3,MAUDE-FLAG.%*  It may, however, be provided
+explicitly.  All output will, where appropriate, specify which was used.
+MAUDE is the normal first-pass decoder.
+.skip 1;
+.once flush left;
+USE OF NUMBERS
+	There are three possibilities here:  one is completely general, while
+the other two are less general, probably faster, and more reliable where
+applicable.  The most general case requires a particular code group to be
+entirely numbers or entirely letters, but allows the two types to be mixed
+arbitrarily within a message.  Clearly, this should also work when all code
+groups are letters, or when all code groups are numbers.  The other two
+cases specify that all code groups will be composed of letters, or that all
+code groups will be composed of numbers.
+	The parameter may not be set in calls to the decoder; it is most
+conveniently set by using %3NUMSTA.%1  Typing %3<NUMSTA#MAYBE>%1 will
+allow both numbers and letters; %3<NUMSTA#T>%1 will specify numbers
+only; and %3<NUMSTA#<>>%1 will specify letters only.  In all cases,
+%3NUMSTA%1 returns the previous status; %3<NUMSTA>%1 returns the current
+status, without changing it.
+	The setting of this parameter should not be changed during the operation
+of the decoder.  Thus if MAUDE or FRAUD  were run in numbers-only mode, REPAIR
+must also be run in that mode.  Initially the decoder will allow both numbers
+and letters.
+.group
+.group skip 1;
+.once flush left;
+VALUE RETURNED
+	There are six possible results here.  As with MAUDE usage,
+the result is controlled by an optional argument to %3FIV,%* the second; its
+default is %3,RESULT,%* which may, of course, be set by the user.
+.begin;
+.indent 0,13;
+.tabs 14
+	%3T%*\Initial setting of %3,RESULT.%*  An atom will be created, using the COMDEC
+convention, and setg'ed to the decoding; %3FIV%* will return the atom.
+	%2atom%1\Other than %3T,%* of course.  This atom will be setg'ed to the decoding,
+and returned.
+	""\A file will be created, in the SEND directory, with a name closely
+related to the name of the CODE file, and the decoding will be
+gc-dumped into it.  The name of the file will be returned, and
+the decoding will no longer exist in the muddle.
+	%2string%1\A file with this name will be created, to contain the gc-dumped
+decoding.  The process of gc-dumping requires considerable real time, falling %2after%1
+the corrected decoding has been printed.
+	%3<>%*\The decoding will be returned.
+	%2else%1\The decoding will go away, and the decoder will return %3,NULL.%*
+Unless someone is interested in looking at the decoding (which isn't
+particularly edifying), this is the way to go.  By running with this setting in
+unverbose mode, the user may waste much CPU time while producing no observable
+results.  The advantage of this setting arises from the use of %3DIVERT%1 from the
+"GC" package.  A garbage collection will normally occur following the completion of
+a decoding; with this setting, the decoding data structure will be recycled immediately,
+saving both time and memory.
+.end;
+.apart;
+.group skip 1;
+	The basic call is thus %3<FIV#"CODE;%2fn1#fn2%3">,%1
+which will do more
+or less the right thing depending on %3,MAUDE-FLAG%* and %3,RESULT.%*
+%3<FIV#"CODE;%2fn1#fn2%3"#%2something%3>%1
+will override the current setting of
+%3RESULT; <FIV#"CODE;%2fn1#fn2%3"#%2something%3#<OR#ATOM#FALSE>>%1
+will override
+both %3RESULT%* and %3MAUDE-FLAG.%*
+.skip 1;
+.once flush left;
+INTERPRETATION OF SCRIPT
+	The script will start with "Code groups are of length n.", which
+may be a cause for alarm if n is not 5.
+	It will continue with 
+"Picked %2random string%1 at nnn from <old or new> to add %2random string 2.%1"
+The first random string is the tail end of the partial decoding which
+the decoder is currently trying to extend; its last letter is letter #nnn.
+The second random string is the thing which the decoder is about to add to
+the partial decoding.  If "from old" is printed, this is the second, and
+infinitely hairy, try on the partial decoding in question.  This sentence
+may be followed on the same line by "mm leaves flushed.", which indicates
+that mm partial decodings have been eliminated because they fell too far
+behind the longest partial decoding.
+	"<OR SADD FIX PUNT> %2random string%1 at nnn."
+This indicates that a new partial decoding has been generated from the last
+one picked; it is of length nnn letters.  SADD indicates that the new code
+group was obtained more or less directly from the MAUDE decoding; FIX that
+much groveling was required; PUNT that infinite groveling didn't give a code
+group, so this ugly string was accepted instead.
+"CMAX = nnn" is printed out whenever a new longest partial decoding is
+created; nnn is its length.
+.skip 1;
+.once flush left;
+DECODING OUTPUT
+	The MAUDE/FRAUD decoding will have a * in any position which didn't
+decode to a letter.  When non-letters remain in the corrected decoding,
+they will print as
+[m/n#%2random#string%1], where m is the number of marks, n is the
+run-length sequence, printed as a fix, and the string consists
+of those letters which are one mark error away from the offender.
+.skip 1;
+.once flush left;
+OPERATING INFORMATION
+	"lll possibilities generated at mmm locations in nnn iterations."
+The number of iterations is the number of times a new partial decoding
+was picked to extend:  if in verbose mode, the number of times "Picked..."
+was printed out.
+	The number of locations is the number of separate spots in the decoding
+where the decoder attempted to end a code group.  If in verbose mode,
+this will be the number of lines started with one of SADD, FIX, or PUNT.
+	The number of possibilities is always greater than the number of locations;
+it counts the total number of code groups generated and tried.  There will
+be no information about many of these in the script, since they are only
+printed if better than the partial decoding already existing at the location
+in question.
+	The rest of the operating information is the time in CPU seconds required
+for each phase of the decoding, and the real time required for the entire
+decoding.
+.skip 1;
+.once flush left;
+OTHER ENTRIES
+	%3<MD#"CODE;%2fn1#fn2%3"#"OPTIONAL"#%2atom%3>%1
+runs MAUDE on the given file, and setg's the given atom (or, if none is
+given, a COMDEC-style atom) to the result; it returns the atom.
+	%3<NFD#...>%*
+does the same for FRAUD.  The atom %3xxx-CT%* is setg'ed to a uvector of
+fixes; it can be used to assign the group length through use of %3LEN-ASSIGN,%* below.
+Both of these setg %3MAUDE-FLAG%* to reflect the choice made.
+	%3<LEN-ASSIGN#,xxx-CT#,xxx>%* where xxx is an atom returned
+by %3MD%* or %3NFD.%*
+This setg's various internal atoms to reflect the probable length of the code groups,
+based on data obtained from the first-pass decoding.  It returns the group length.
+	%3<SETLEN#%2fix%3>%1 causes the group length to be the fix; useful if the
+wrong value was obtained from decoding data.
+	%3<REPAIR#%2decoding%3>%1
+runs the decoder on the decoding supplied, preferably one produced by
+%3NFD%* or %3MD.%*  Before doing this, it is well to try
+%3<LEN-ASSIGN#,xxx-CT#,xxx>,%* where xxx is the name supplied for the decoding
+to %3MD%* or %3NFD.%*  This tells the decoder how long the code groups are.
+%3REPAIR%1 returns the decoding; verbosity is as for %3FIV,%1 except that
+operating information is not available.
+	%3<PRINTR#%2decoding%3#"OPTIONAL"#<OR#ATOM#FALSE>>%1 will print
+a decoding.  If %3REPAIR%1 has not been run on it, the MAUDE/FRAUD decoding will
+be printed; if it has, the corrected decoding will result.  The second argument
+should normally be false, and that is its default.
+
+
