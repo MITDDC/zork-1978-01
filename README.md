@@ -22,6 +22,8 @@ There was a ```zork.log``` file within the [```madman```](../main/zork/madman) d
 
 ### [codemeta.json](../main/codemeta.json)
 This file is metadata about the Zork files, using the [CodeMeta Project](https://codemeta.github.io/) schema.
+### [LICENSE.md](../main/LICENSE.md)
+This file describes the details about the rights to these files. See [Rights](#rights) for additional information.
 ### [README.md](../main/README.md)
 This file is the readme detailing the content and context for this repository.
 ### [tree.txt](../main/tree.txt)
@@ -30,6 +32,6 @@ A file tree listing the files in the [```zork```](../main/zork) directory showin
 ## Preferred Citation
 [filename], Zork source code, 1978 January, Massachusetts Institute of Technology, Tapes of Tech Square (ToTS) collection, MC-0741. Massachusetts Institute of Technology, Department of Distinctive Collections, Cambridge, Massachusetts. [swh:1:dir:0e61db4f256f1042f7dde19b052f8d982fe53c62](https://archive.softwareheritage.org/swh:1:dir:0e61db4f256f1042f7dde19b052f8d982fe53c62/)
 ## Rights
-The ownership status of these files is not entirely clear. To the extent that MIT holds rights in these files, we are happy to support their broad public use.  Any questions about permissions should be directed to [permissions-lib@mit.edu](mailto:permissions-lib@mit.edu)
+To the extent that MIT holds rights in these files, they are released under the terms of the [MIT No Attribution License](https://opensource.org/licenses/MIT-0). See the ```LICENSE.md``` file for more information. Any questions about permissions should be directed to [permissions-lib@mit.edu](mailto:permissions-lib@mit.edu)
 ## Acknowledgements
 Thanks to [Lars Brinkhoff](https://github.com/larsbrinkhoff) for help with identifying these files and with extracting them using the itstar program mentioned above.
